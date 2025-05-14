@@ -1,3 +1,10 @@
+<?php
+$config = require 'config.php';
+$baseURL = $config['baseURL'];
+?>
+
+<?php include 'Layout/AdminHeader.php'; ?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -7,7 +14,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title>Register - SB Admin</title>
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="<?= $baseURL?>/Assets/Admin/css/styles.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     </head>
     <body class="bg-primary">
@@ -19,8 +26,11 @@
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
                                     <div class="card-header"><h3 class="text-center font-weight-light my-4">Create Account</h3></div>
+                                    <?php if (!empty($error)): ?>
+                                        <div class="alert alert-danger"><?= $error ?></div>
+                                    <?php endif; ?>
                                     <div class="card-body">
-                                        <form>
+                                        <form action="User/register" method="post">
                                             <div class="row mb-3">
                                                 <div class="col-md-6">
                                                     <div class="form-floating mb-3 mb-md-0">
@@ -54,12 +64,12 @@
                                                 </div>
                                             </div>
                                             <div class="mt-4 mb-0">
-                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="login.html">Create Account</a></div>
+                                                <div class="d-grid"><a class="btn btn-primary btn-block" href="<?= $baseURL . "/user/login"?>">Create Account</a></div>
                                             </div>
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="login.html">Have an account? Go to login</a></div>
+                                        <div class="small"><a href="<?= $baseURL . "/user/login"?>">Have an account? Go to login</a></div>
                                     </div>
                                 </div>
                             </div>
