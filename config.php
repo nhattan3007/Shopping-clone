@@ -1,9 +1,9 @@
 <?php
 
 return array(
-    'base'=> 'demo/',
-    'baseURL'=> 'http://localhost/demo/',
-    'assets'=> 'demo/assets',
+    'base'=> 'Shopping-clone/',
+    'baseURL'=> 'http://localhost/Shopping-clone/',
+    'assets'=> 'Shopping-clone/Assests',
     'db'=> array(
         'host'=> 'localhost',
         'name'=> 'productdb',

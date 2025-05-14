@@ -8,6 +8,22 @@ class UserModel{
     {
         $this->db = Database::connect();
     }
+    //lấy các người dùng để xem xét đang nhập
+    public function getAllUsers()
+    {
+        $stmt = $this->db->prepare("SELECT * FROM users ORDER BY id ASC");
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    //tạo người dùng mới với hashpassword **hash password là mã hóa hóa password 1 chiều để chặng đánh cấp dữ liệu
+    public function createUser($fullname, $username, $password)
+    {
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?,a ?)";
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$fullname, $username, $hashedPassword]);
+        return $this->db->lastInsertId();
+    }
 }
 
 ?>
