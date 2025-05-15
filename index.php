@@ -27,6 +27,6 @@ if (class_exists($controllerName) && method_exists($controllerName, $method)) {
         call_user_func([$controller, $method]);
     }
 } else {
-    echo "404 - Không tìm thấy controller hoặc method.";
+    include "App/Views/Error/404.php";
 }
 ?>
