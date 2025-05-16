@@ -11,7 +11,7 @@ class UserModel{
     //lấy các người dùng để xem xét đang nhập
     public function getAllUsers()
     {
-        $stmt = $this->db->prepare("SELECT * FROM users ORDER BY id ASC");
+        $stmt = $this->db->prepare("SELECT * FROM users ORDER BY UserId ASC");
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
@@ -19,7 +19,7 @@ class UserModel{
     public function createUser($fullname, $username, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (FullName, UserName, Password) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$fullname, $username, $hashedPassword]);
         return $this->db->lastInsertId();

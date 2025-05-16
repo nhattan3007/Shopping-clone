@@ -20,14 +20,14 @@ class OrderModel
     // cập nhập tổng đơn hàng
     public function updateOrderTotal($orderId, $totalAmount)
     {
-        $sql = "UPDATE orders SET total_amount = ? WHERE id = ?";
+        $sql = "UPDATE orders SET TotalAmount = ? WHERE id = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$totalAmount, $orderId]);
     }
     //nhập dữ liệu đơn hàng
     public function insertOrderItem($orderId, $productId, $quantity, $price)
     {
-        $sql = "INSERT INTO orderitems (OrderId, ProductId, quantity, price)
+        $sql = "INSERT INTO orderitems (OrderId, ProductId, Quantity, Price)
                 VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$orderId, $productId, $quantity, $price]);
@@ -43,10 +43,10 @@ class OrderModel
     //lấy đơn hàng từ khách hàng
     public function getAllOrdersWithUser()
     {
-        $sql = "SELECT orders.*, users.fullname 
+        $sql = "SELECT orders.*, users.FullName 
                 FROM orders 
-                LEFT JOIN users ON orders.user_id = users.id 
-                ORDER BY orders.order_date DESC";
+                LEFT JOIN users ON orders.UserId = users.UserId 
+                ORDER BY orders.OrderDate DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -54,7 +54,7 @@ class OrderModel
     //cập nhật trạng thái của đơn hàng
     public function updateStatus($orderId, $newStatus)
     {
-        $sql = "UPDATE orders SET status = ? WHERE id = ?";
+        $sql = "UPDATE orders SET status = ? WHERE OrderId = ?";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$newStatus, $orderId]);
     }
@@ -62,9 +62,9 @@ class OrderModel
     public function getOrderCountPerDay($days = 7)
     {
         $stmt = $this->db->prepare("
-            SELECT DATE(order_date) as order_day, COUNT(*) as order_count
+            SELECT DATE(OrderDate) as order_day, COUNT(*) as order_count
             FROM orders
-            WHERE order_date >= DATE_SUB(CURDATE(), INTERVAL :days DAY)
+            WHERE OrderDate >= DATE_SUB(CURDATE(), INTERVAL :days DAY)
             GROUP BY order_day
             ORDER BY order_day ASC
         ");

@@ -17,13 +17,13 @@ class ProductModel{
     // thêm sản phẩm vào database
         public function add($name, $price, $image)
     {
-        $stmt = $this->db->prepare("INSERT INTO nameindata (Name, Price, Image) VALUES (?, ?, ?)");
+        $stmt = $this->db->prepare("INSERT INTO Products (ProductName, Price, Image) VALUES (?, ?, ?)");
         $stmt->execute([$name, $price, $image]);
     }
     //lấy sản phẩm từ ID để thống kê
     public function getProductById($id)
     {
-        $sql = "SELECT * FROM product WHERE Id = :id";
+        $sql = "SELECT * FROM products WHERE ProductId = :id";
         $stmt = $this->db->prepare($sql);
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
@@ -31,7 +31,7 @@ class ProductModel{
     }
     public function delete($id)
     {
-        $stmt = $this->db->prepare("DELETE FROM product WHERE ID = ?");
+        $stmt = $this->db->prepare("DELETE FROM products WHERE ProductId = ?");
 
         $stmt->execute([$id]);
     }
