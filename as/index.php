@@ -1,1 +1,0 @@
-d:\xampp\htdocs\demo\App\view\admin\index.php d:\xampp\htdocs\demo\App\view\admin\ordermanage.php d:\xampp\htdocs\demo\App\view\admin\report.php
