@@ -3,6 +3,6 @@
 class HomeController{
     public function index()
     {
-        include "App/view/admin/index.php";
+        include "App/Views/Home/index.php";
     }
 }
