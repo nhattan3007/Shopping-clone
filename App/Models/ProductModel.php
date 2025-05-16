@@ -1,21 +1,23 @@
-<?php 
+<?php
 require_once __DIR__ . "/../../Core/db.php";
 
-class productModel{
+class productModel
+{
     private $db;
-    
+
     public function __construct()
     {
         $this->db = Database::connect();
     }
     //lấy và show sản phẩm ra các trang mong muốn
-    public function getAllProducts() {
-        $stmt = $this->db->prepare('SELECT * FROM Products ORDER BY ProductId ASC');
+    public function getAllProducts()
+    {
+        $stmt = $this->db->prepare('SELECT * FROM products ORDER BY ProductId ASC');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả kết quả về
     }
     // thêm sản phẩm vào database
-        public function add($name, $price, $image)
+    public function add($name, $price, $image)
     {
         $stmt = $this->db->prepare("INSERT INTO nameindata (Name, Price, Image) VALUES (?, ?, ?)");
         $stmt->execute([$name, $price, $image]);
@@ -36,5 +38,3 @@ class productModel{
         $stmt->execute([$id]);
     }
 }
-
-?>
