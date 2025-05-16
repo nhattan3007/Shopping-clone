@@ -1,9 +1,4 @@
-<?php
-$config = include_once __DIR__ . '/../../../config.php';
-$baseURL = $config['baseURL'];
-?>
-
-<?= include './Layout/AdminHeader.php' ?>
+<?php include_once "Layout/HomeHeader.php"?>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
@@ -208,12 +203,5 @@ $baseURL = $config['baseURL'];
             </div>
         </section>
         <!-- Footer-->
-        <footer class="py-5 bg-dark">
-            <div class="container"><p class="m-0 text-center text-white">Copyright &copy; Your Website 2023</p></div>
-        </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="<?=$baseURL?>Assets/js/scripts.js"></script>
-    </body>
-</html>
+        <?php 
+        include_once "Layout/HomeFooter.php"?>
