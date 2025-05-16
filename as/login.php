@@ -1,11 +1,3 @@
-<?php
-$config = require 'config.php';
-$baseURL = $config['baseURL'];
-?>
-
-<?php include 'Layout/AdminHeader.php'; ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -48,9 +40,8 @@ $baseURL = $config['baseURL'];
                                         </form>
                                     </div>
                                     <div class="card-footer text-center py-3">
-                                        <div class="small"><a href="<?= $baseURL ?>/user/register">Need an account? Sign up!</a></div>
+                                        <div class="small"><a href="register.html">Need an account? Sign up!</a></div>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
