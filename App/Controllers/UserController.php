@@ -55,9 +55,9 @@ class UserController{
             $stmt->execute([$username]);
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
+            if ($user && password_verify($password, $user['Password'])) {
+                $_SESSION['user_id'] = $user['UserId'];
+                $_SESSION['username'] = $user['UserName'];
                 $config = require 'config.php';
             
                 $baseURL = $config['baseURL'];
