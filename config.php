@@ -6,12 +6,12 @@ return array(
     'assets'=> 'Shopping-clone/Assests',
     'db'=> array(
         'host'=> 'localhost',
-        'name'=> 'productdb',
+        'name'=> 'test',
         'username'=> 'root',
         'password'=> '',
     )
 );
-include __DIR__ . '/Core/db.php';
+include_once  __DIR__ . '/Core/db.php';
 $conn = new mysqli(
     $config['db']['host'],
     $config['db']['username'],

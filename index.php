@@ -2,7 +2,6 @@
 //Đặt Controller tại đây->
 require_once __DIR__ . "/App/Controllers/AdminController.php";
 require_once __DIR__ . "/App/Controllers/CartController.php";
-require_once __DIR__ . "/App/Controllers/CheckoutController.php";
 require_once __DIR__ . "/App/Controllers/HomeController.php";
 require_once __DIR__ . "/App/Controllers/UserController.php";
 require_once __DIR__ . "/App/Controllers/ProductController.php";

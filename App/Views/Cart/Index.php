@@ -1,7 +1,9 @@
 <?php
 $config = require 'config.php';
 $baseURL = $config['baseURL'];
+include "Layout/HomeHeader.php"
 ?>
+
 
 <section>
     <div class="container">
@@ -46,3 +48,6 @@ $baseURL = $config['baseURL'];
         <?php endif; ?>
     </div>
 </section>
+<?php
+include "Layout/AdminFooter.php";
+?>

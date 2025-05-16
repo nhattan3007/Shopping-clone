@@ -44,10 +44,8 @@ class CartController{
                 $products =  $productModel->getProductById($product['product_id']);
                 $products['quantity'] = $product['quantity'];
                 $cartItems[] =  $products;
-
             }
         }
-        
         include './App/Views/Cart/Index.php';
     }
 }
