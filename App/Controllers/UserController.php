@@ -1,5 +1,6 @@
 <?php
 require_once __DIR__ . "/../Models/UserModel.php";
+require_once __DIR__ . "/../../Core/PHPMailer/Mailer.php";
 
 class UserController{
     public function register()
@@ -76,36 +77,37 @@ class UserController{
         header("Location: " . $baseURL.'home/index'); // về trang chủ
         exit;
     }
-    // public function contract()
-    // {
-    //     if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    //         $userName = htmlspecialchars($_POST['name']);
-    //         $userEmail = htmlspecialchars($_POST['email']);
-    //         $subject = htmlspecialchars($_POST['subject']);
-    //         $message = htmlspecialchars($_POST['message']);
+    public function contract()
+    {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $userName = htmlspecialchars($_POST['name']);
+            $userEmail = htmlspecialchars($_POST['email']);
+            $subject = htmlspecialchars($_POST['subject']);
+            $message = htmlspecialchars($_POST['message']);
 
-    //         $adminEmail = "nguyenminhson13231@gmail.com"; // Email admin
-    //         $emailSubject = "Liên hệ từ $userName";
+            $adminEmail = "nguyenminhson13231@gmail.com"; // Email admin
+            $emailSubject = "Liên hệ từ $userName";
 
-    //         // Nội dung email đẹp
-    //         $emailBody = "<h3>Thông tin liên hệ</h3>
-    //                       <p><strong>Tên:</strong> $userName</p>
-    //                       <p><strong>Email:</strong> $userEmail</p>
-    //                       <p><strong>Tiêu đề:</strong> $subject</p>
-    //                       <p><strong>Nội dung:</strong><br>$message</p>";
+            // Nội dung email đẹp
+            $emailBody = "<h3>Thông tin liên hệ</h3>
+                          <p><strong>Tên:</strong> $userName</p>
+                          <p><strong>Email:</strong> $userEmail</p>
+                          <p><strong>Tiêu đề:</strong> $subject</p>
+                          <p><strong>Nội dung:</strong><br>$message</p>";
 
-    //         if (Mailer::sendMail($adminEmail, $emailSubject, $emailBody)) {
-    //             $_SESSION['contact_success'] = "Cảm ơn bạn đã liên hệ!";
-    //         } else {
-    //             $_SESSION['contact_error'] = "Gửi email thất bại. Vui lòng thử lại!";
-    //         }
-    //         $config = require './config.php';
-    //         $baseURL = $config['baseURL'];
+            if (Mailer::sendMail($adminEmail, $emailSubject, $emailBody)) {
+                $_SESSION['contract_success'] = "Cảm ơn bạn đã liên hệ!";
+            } else {
+                $_SESSION['contract_error'] = "Gửi email thất bại. Vui lòng thử lại!";
+            }
 
-    //         header("Location: " . $baseURL."user/contract");
-    //         exit();
-    //     }
+            $config = require './config.php';
+            $baseURL = $config['baseURL'];
+
+            header("Location: " . $baseURL."user/contract");
+            exit();
+        }
         
-    //     include 'App/view/user/contract.php';
-    // }
+        include 'App/Views/User/Contract.php';
+    }
 }

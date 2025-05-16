@@ -24,7 +24,7 @@ class CartController{
             $baseURL = $config['baseURL'];
            
 
-            header('Location:'. $baseURL.'/home/index');
+            header('Location:'. $baseURL.'/Product/index');
             exit;
         }
     }

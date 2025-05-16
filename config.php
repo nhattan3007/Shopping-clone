@@ -6,7 +6,7 @@ return array(
     'assets'=> 'Shopping-clone/Assests',
     'db'=> array(
         'host'=> 'localhost',
-        'name'=> 'test',
+        'name'=> 'shoppingqst',
         'username'=> 'root',
         'password'=> '',
     )

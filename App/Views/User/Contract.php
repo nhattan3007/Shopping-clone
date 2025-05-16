@@ -3,7 +3,7 @@ $config = require 'config.php';
 $baseURL = $config['baseURL'];
 ?>
 
-<?php include 'layout/homeheader.php'; ?>
+<?php include 'Layout/HomeHeader.php'; ?>
 
 <div class="container py-5">
     <div class="row justify-content-center">
@@ -14,9 +14,9 @@ $baseURL = $config['baseURL'];
                 </div>
                 <div class="card-body">
 
-                    <?php if (!empty($_SESSION['contact_success'])): ?>
-                        <div class="alert alert-success"><?= $_SESSION['contact_success'] ?></div>
-                        <?php unset($_SESSION['contact_success']); ?>
+                    <?php if (!empty($_SESSION['contract_success'])): ?>
+                        <div class="alert alert-success"><?= $_SESSION['contract_success'] ?></div>
+                        <?php unset($_SESSION['contract_success']); ?>
                     <?php endif; ?>
 
                     <?php if (!empty($_SESSION['contact_error'])): ?>
@@ -24,7 +24,7 @@ $baseURL = $config['baseURL'];
                         <?php unset($_SESSION['contact_error']); ?>
                     <?php endif; ?>
 
-                    <form method="POST" action="">
+                    <form method="POST" action="<?= $baseURL. "User/contract"?>">
                         <div class="mb-3">
                             <label for="name" class="form-label">Tên của bạn</label>
                             <input type="text" class="form-control" id="name" name="name" required placeholder="Nhập tên của bạn">
@@ -54,4 +54,4 @@ $baseURL = $config['baseURL'];
     </div>
 </div>
 
-<?php include 'layout/homefooter.php'; ?>
+<?php include 'Layout/HomeFooter.php'; ?>

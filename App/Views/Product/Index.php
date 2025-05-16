@@ -17,21 +17,15 @@
                             <div class="card-body p-4">
                                 <div class="text-center">
                                     <!-- Product name-->
-                                    <h5 class="fw-bolder"><?php echo ($product['Name']); ?></h5>
+                                    <h5 class="fw-bolder"><?php echo ($product['ProductName']); ?></h5>
                                     <!-- Product price-->
                                     <?php echo ($product['Price']);?>
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <form method="post" action="<?=$baseURL .'cart/add'?>" class="text-center mb-lg-2">
-                            <input type="hidden" name="product_id" value="<?= $product['Id'] ?>">
+                            <form method="post" action="<?=$baseURL .'Cart/add'?>" class="text-center mb-lg-2"  onsubmit="return true;">
+                            <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
                             <button type="submit" class=" btn-outline-light p4 mt-auto btn btn-primary btn-sm">Add to Cart</button>
-
-                                <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="display: flex;">
-                                    <div class="text-center"><a class="btn btn-outline-light mt-auto btn-primary " href="#">View options</a></div>
-                                    <input type="hidden" name="product_id" value="">
-                                    <div class="text-center"><a class="btn btn-outline-light mt-auto btn-primary ms-lg-1 " href="#">Add recard</a></div>
-                                </div> -->
                             </form>
                         </div>
                     </div>

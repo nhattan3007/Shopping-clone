@@ -10,7 +10,7 @@ class ProductModel{
     }
     //lấy và show sản phẩm ra các trong mong muốn
     public function getAllProducts() {
-        $stmt = $this->db->prepare('SELECT * FROM product ORDER BY ID ASC');
+        $stmt = $this->db->prepare('SELECT * FROM products ORDER BY ProductId ASC');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả kết quả về
     }
