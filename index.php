@@ -2,7 +2,6 @@
 //Đặt Controller tại đây->
 require_once __DIR__ . "/App/Controllers/AdminController.php";
 require_once __DIR__ . "/App/Controllers/CartController.php";
-require_once __DIR__ . "/App/Controllers/CheckoutController.php";
 require_once __DIR__ . "/App/Controllers/HomeController.php";
 require_once __DIR__ . "/App/Controllers/UserController.php";
 require_once __DIR__ . "/App/Controllers/ProductController.php";
@@ -27,6 +26,6 @@ if (class_exists($controllerName) && method_exists($controllerName, $method)) {
         call_user_func([$controller, $method]);
     }
 } else {
-    echo "404 - Không tìm thấy controller hoặc method.";
+    include "App/Views/Error/404.php";
 }
 ?>
