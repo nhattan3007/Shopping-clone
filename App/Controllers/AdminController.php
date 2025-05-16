@@ -20,7 +20,6 @@ class AdminController{
         require_once __DIR__ . '/../Models/OrderModel.php';
         $orderModel = new OrderModel();
         $ordersPerDay = $orderModel->getOrderCountPerDay(7); // Truyền vào index view
-
         include __DIR__ . '/../Views/Admin/Report.php';
        
     }

@@ -8,7 +8,7 @@ require_once __DIR__ . "/App/Controllers/ProductController.php";
 require_once __DIR__ . "/App/Controllers/OrderController.php";
 
 
-$url = $_GET['url'] ?? 'product/product'; // Mặc định trang sản phẩm
+$url = $_GET['url'] ?? 'home/index'; // Mặc định trang sản phẩm
 
 $urlArr = explode('/', $url);
 
