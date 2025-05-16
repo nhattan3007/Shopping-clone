@@ -1,10 +1,13 @@
 <?php
 
-class CartController{
+class CartController
+{
     public function add()
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' 
-            && isset($_POST['product_id'])) {
+        if (
+            $_SERVER['REQUEST_METHOD'] === 'POST'
+            && isset($_POST['product_id'])
+        ) {
             $productId = $_POST['product_id'];
 
             if (!isset($_SESSION['cart'])) {
@@ -20,11 +23,11 @@ class CartController{
                 ];
             }
             $config = require 'config.php';
-            
-            $baseURL = $config['baseURL'];
-           
 
-            header('Location:'. $baseURL.'/home/index');
+            $baseURL = $config['baseURL'];
+
+
+            header('Location:' . $baseURL . '/Product/index');
             exit;
         }
     }
@@ -33,15 +36,13 @@ class CartController{
         require_once 'App/Models/ProductModel.php';
         $productModel = new ProductModel();
         if (session_status() === PHP_SESSION_NONE) {
-           session_start();
+            session_start();
         }
 
-        $cartItems =[];
-        if (isset($_SESSION['cart']))
-        {
-            foreach($_SESSION['cart'] as $product)
-            {
-                $products =  $productModel->getProductById($product['product_id']);
+        $cartItems = [];
+        if (isset($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $product) {
+                $products =  $productModel->getProductById($product['ProductId']);
                 $products['quantity'] = $product['quantity'];
                 $cartItems[] =  $products;
             }
