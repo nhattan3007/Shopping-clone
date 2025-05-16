@@ -7,7 +7,7 @@ class Database
     {
         if (!self::$connection) {
             // Sửa lại đường dẫn đúng
-            $config = require __DIR__ . '/../Core/db.php';
+            $config = require __DIR__ . '/../config.php'; // Đường dẫn đến file config.php
             $db = $config['db'];
 
             try {
