@@ -1,16 +1,16 @@
 <?php 
 require_once __DIR__ . "/../../Core/db.php";
 
-class ProductModel{
+class productModel{
     private $db;
     
     public function __construct()
     {
         $this->db = Database::connect();
     }
-    //lấy và show sản phẩm ra các trong mong muốn
+    //lấy và show sản phẩm ra các trang mong muốn
     public function getAllProducts() {
-        $stmt = $this->db->prepare('SELECT * FROM product ORDER BY ID ASC');
+        $stmt = $this->db->prepare('SELECT * FROM Products ORDER BY ProductId ASC');
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); // Trả kết quả về
     }

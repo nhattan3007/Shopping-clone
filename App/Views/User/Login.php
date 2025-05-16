@@ -3,7 +3,7 @@ $config = require 'config.php';
 $baseURL = $config['baseURL'];
 ?>
 
-<?php include 'Layout/AdminHeader.php'; ?>
+<?php include 'Layout/HomeHeader.php'; ?>
 
 
 <!DOCTYPE html>
