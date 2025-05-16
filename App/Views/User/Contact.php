@@ -14,9 +14,9 @@ $baseURL = $config['baseURL'];
                 </div>
                 <div class="card-body">
 
-                    <?php if (!empty($_SESSION['contract_success'])): ?>
-                        <div class="alert alert-success"><?= $_SESSION['contract_success'] ?></div>
-                        <?php unset($_SESSION['contract_success']); ?>
+                    <?php if (!empty($_SESSION['contact_success'])): ?>
+                        <div class="alert alert-success"><?= $_SESSION['contact_success'] ?></div>
+                        <?php unset($_SESSION['contact_success']); ?>
                     <?php endif; ?>
 
                     <?php if (!empty($_SESSION['contact_error'])): ?>

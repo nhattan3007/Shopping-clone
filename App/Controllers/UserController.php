@@ -5,13 +5,10 @@ require_once __DIR__ . "/../../Core/PHPMailer/Mailer.php";
 class UserController{
     public function register()
     {
-       
         if (session_status() === PHP_SESSION_NONE)
         {
             session_start();
         }
-
-        $error = '';
         
         $config = require './config.php';
         $baseURL = $config['baseURL'];
@@ -21,7 +18,13 @@ class UserController{
             $fullname = $_POST['fullname'];
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $userModel = new UserModel();
+            $confirmPassword = $_POST['confirm_password'] ?? '';
+            if ($password !== $confirmPassword) {
+                $_SESSION['register_error'] = "Wrong Confirm Password";
+                header("location: ". $baseURL . "User/register");
+                exit;
+            }else{
+                $userModel = new UserModel();
             $userId = $userModel->createUser($fullname, $username, $password);
             
             $_SESSION['user_id'] = $userId;
@@ -29,6 +32,7 @@ class UserController{
 
             header("Location: " . $baseURL. 'home/index');
              exit;
+            }
 
         }
        include 'App/Views/User/Register.php';
@@ -44,7 +48,7 @@ class UserController{
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $pdo = new PDO("mysql:host=localhost;dbname=productdb", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=shoppingqsT", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
@@ -96,9 +100,9 @@ class UserController{
                           <p><strong>Nội dung:</strong><br>$message</p>";
 
             if (Mailer::sendMail($adminEmail, $emailSubject, $emailBody)) {
-                $_SESSION['contract_success'] = "Cảm ơn bạn đã liên hệ!";
+                $_SESSION['contact_success'] = "Cảm ơn bạn đã liên hệ!";
             } else {
-                $_SESSION['contract_error'] = "Gửi email thất bại. Vui lòng thử lại!";
+                $_SESSION['contact_error'] = "Gửi email thất bại. Vui lòng thử lại!";
             }
 
             $config = require './config.php';

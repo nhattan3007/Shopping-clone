@@ -19,7 +19,7 @@ class UserModel{
     public function createUser($fullname, $username, $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?,a ?)";
+        $sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$fullname, $username, $hashedPassword]);
         return $this->db->lastInsertId();

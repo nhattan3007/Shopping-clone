@@ -41,7 +41,7 @@ class CartController{
         {
             foreach($_SESSION['cart'] as $product)
             {
-                $products =  $productModel->getProductById($product['product_id']);
+                $products =  $productModel->getProductById($product['Product_id']);
                 $products['quantity'] = $product['quantity'];
                 $cartItems[] =  $products;
             }
