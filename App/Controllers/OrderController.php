@@ -56,7 +56,7 @@ class OrderController{
         $config = require './config.php';
         $baseURL = $config['baseURL'];
 
-        include 'App/Views/Checkout/';
+        include 'App/Views/Checkout/History.php';
     }
     public function updateStatus()
     {

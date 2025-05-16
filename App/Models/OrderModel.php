@@ -12,7 +12,7 @@ class OrderModel
     //nhập đơn đặt hàng từ home đến khách hàng
     public function insertOrder($order_date, $user_id, $total_amount)
     {
-        $sql = "INSERT INTO orders (order_date, user_id, total_amount,status) VALUES (?, ?, ?,'Đặt Hàng')";
+        $sql = "INSERT INTO orders (OrderDate, UserId, total_amount,status) VALUES (?, ?, ?,'Đặt Hàng')";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$order_date, $user_id, $total_amount]);
         return $this->db->lastInsertId();
@@ -27,7 +27,7 @@ class OrderModel
     //nhập dữ liệu đơn hàng
     public function insertOrderItem($orderId, $productId, $quantity, $price)
     {
-        $sql = "INSERT INTO order_items (order_id, product_id, quantity, price)
+        $sql = "INSERT INTO orderitems (OrderId, ProductId, quantity, price)
                 VALUES (?, ?, ?, ?)";
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$orderId, $productId, $quantity, $price]);
@@ -35,7 +35,7 @@ class OrderModel
     //sấp xếp đơn hàng theo ngày
     public function getOrdersByUserId($userId)
     {
-        $sql = "SELECT * FROM orders WHERE user_id = ? ORDER BY order_date DESC";
+        $sql = "SELECT * FROM orders WHERE UserId = ? ORDER BY OrderDate DESC";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);

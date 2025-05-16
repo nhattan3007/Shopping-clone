@@ -112,6 +112,6 @@ class UserController{
             exit();
         }
         
-        include 'App/Views/User/Contract.php';
+        include 'App/Views/User/Contact.php';
     }
 }
