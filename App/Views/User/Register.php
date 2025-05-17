@@ -37,11 +37,11 @@ $baseURL = $config['baseURL'];
                                 <div class="card-body">
                                     <form action="<?= $baseURL . "user/register" ?>" method="post">
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" name="fullname" type="text" placeholder="name@example.com" />
+                                            <input class="form-control" id="inputEmail" name="fullname" type="text" placeholder="FullName" />
                                             <label>FullName</label>
                                         </div>
                                         <div class="form-floating mb-3">
-                                            <input class="form-control" id="inputEmail" name="username" type="text" placeholder="name@example.com" />
+                                            <input class="form-control" id="inputEmail" name="username" type="text" placeholder="UserName" />
                                             <label>UserName</label>
                                         </div>
                                         <div class="row mb-3">

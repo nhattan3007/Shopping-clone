@@ -18,10 +18,10 @@
             <tbody>
                 <?php foreach ($orders as $order): ?>
                     <tr>
-                        <td>#<?= $order['id'] ?></td>
-                        <td><?= date('d/m/Y H:i', strtotime($order['order_date'])) ?></td>
-                        <td><?= $order['status'] ?></td>
-                        <td><?= number_format($order['total_amount'], 0) ?> $</td>
+                        <td>#<?= $order['OrderId'] ?></td>
+                        <td><?= date('d/m/Y H:i', strtotime($order['OrderDate'])) ?></td>
+                        <td><?= $order['Status'] ?></td>
+                        <td><?= number_format($order['TotalAmount'], 0) ?> $</td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

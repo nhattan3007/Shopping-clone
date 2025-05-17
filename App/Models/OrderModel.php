@@ -12,7 +12,7 @@ class OrderModel
     //nhập đơn đặt hàng từ home đến khách hàng
     public function insertOrder($order_date, $user_id, $total_amount)
     {
-        $sql = "INSERT INTO orders (OrderDate, UserId, total_amount,status) VALUES (?, ?, ?,'Đặt Hàng')";
+        $sql = "INSERT INTO orders (OrderDate, UserId, TotalAmount,status) VALUES (?, ?, ?,'Đặt Hàng')";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$order_date, $user_id, $total_amount]);
         return $this->db->lastInsertId();
@@ -20,7 +20,7 @@ class OrderModel
     // cập nhập tổng đơn hàng
     public function updateOrderTotal($orderId, $totalAmount)
     {
-        $sql = "UPDATE orders SET TotalAmount = ? WHERE id = ?";
+        $sql = "UPDATE orders SET TotalAmount = ? WHERE OrderId = ?";
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$totalAmount, $orderId]);
     }

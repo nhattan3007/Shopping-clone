@@ -3,9 +3,13 @@
 class CartController{
     public function add()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST' 
-            && isset($_POST['product_id'])) {
-            $productId = $_POST['product_id'];
+            && isset($_POST['ProductId'])) {
+            $productId = $_POST['ProductId'];
 
             if (!isset($_SESSION['cart'])) {
                 $_SESSION['cart'] = [];
@@ -15,12 +19,11 @@ class CartController{
                 $_SESSION['cart'][$productId]['quantity'] += 1;
             } else {
                 $_SESSION['cart'][$productId] = [
-                    'product_id' => $productId,
+                    'ProductId' => $productId,
                     'quantity' => 1
                 ];
             }
             $config = require 'config.php';
-            
             $baseURL = $config['baseURL'];
            
 
@@ -41,7 +44,7 @@ class CartController{
         {
             foreach($_SESSION['cart'] as $product)
             {
-                $products =  $productModel->getProductById($product['Product_id']);
+                $products =  $productModel->getProductById($product['ProductId']);
                 $products['quantity'] = $product['quantity'];
                 $cartItems[] =  $products;
             }

@@ -12,7 +12,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="<?=$baseURL.'assets/'.$product['Image']?>" alt="<?=$product['Image']?>" />
+                            <img class="card-img-top" src="<?=$baseURL.'Assets/uploads/img`/'.$product['Image']?>" alt="<?=$product['Image']?>" />
                                 <!-- Product details -->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -23,8 +23,8 @@
                                 </div>
                             </div>
                             <!-- Product actions-->
-                            <form method="post" action="<?=$baseURL .'Cart/add'?>" class="text-center mb-lg-2"  onsubmit="return true;">
-                            <input type="hidden" name="product_id" value="<?= $product['ProductId'] ?>">
+                            <form method="post" action="<?=$baseURL .'Cart/add'?>" class="text-center mb-lg-2">
+                            <input type="hidden" name="ProductId" value="<?= $product['ProductId'] ?>">
                             <button type="submit" class=" btn-outline-light p4 mt-auto btn btn-primary btn-sm">Add to Cart</button>
                             </form>
                         </div>

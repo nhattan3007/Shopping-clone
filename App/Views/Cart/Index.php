@@ -29,7 +29,7 @@ include "Layout/HomeHeader.php"
                         $totalAll += $total;
                     ?>
                         <tr>
-                            <td><?= htmlspecialchars($item['Name']) ?></td>
+                            <td><?= htmlspecialchars($item['ProductName']) ?></td>
                             <td>$<?= number_format($item['Price'], 2) ?></td>
                             <td><?= $item['quantity'] ?></td>
                             <td>$<?= number_format($total, 2) ?></td>

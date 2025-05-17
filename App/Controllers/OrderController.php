@@ -27,8 +27,8 @@ class OrderController{
         $orderId  = $ordermodel->insertOrder($now,$_SESSION['user_id'],0);
         // 3. Tạo Order Detail
         foreach ($_SESSION['cart'] as $item) {
-            $product = $productModel->getProductById($item['product_id']);
-            $orderModel->insertOrderItem($orderId , $item['product_id'], 
+            $product = $productModel->getProductById($item['ProductId']);
+            $orderModel->insertOrderItem($orderId , $item['ProductId'], 
                                 $item['quantity'], $product['Price']);
             $total += $item['quantity']* $product['Price'];
         }
