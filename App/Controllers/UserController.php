@@ -6,7 +6,6 @@ class UserController
 {
     public function register()
     {
-
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
@@ -18,18 +17,26 @@ class UserController
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fullname = $_POST['fullname'];
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $userModel = new UserModel();
-            $userId = $userModel->createUser($fullname, $username, $password);
+            $fullname = $_POST['FullName'];
+            $username = $_POST['UserName'];
+            $password = $_POST['Password'];
+            $conformPassword = $_POST['ConfirmPassword'] ?? '';
+            if ($password !== $conformPassword) {
+                $_SESSION['register_error'] = "Wrong password";
+                header("Location: " . $baseURL . 'User/register');
+                exit;
+            } else {
+                $userModel = new UserModel();
+            }
+            $userId = $userModel->createUser($username, $password, $fullname);
 
-            $_SESSION['user_id'] = $userId;
+            $_SESSION['userid'] = $userId;
             $_SESSION['username'] = $username;
 
             header("Location: " . $baseURL . 'home/index');
             exit;
         }
+        // Nếu không phải là POST request, hiển thị form đăng ký
         include 'App/Views/User/Register.php';
     }
     public function login()
@@ -43,7 +50,7 @@ class UserController
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $pdo = new PDO("mysql:host=localhost;dbname=productdb", "root", "");
+            $pdo = new PDO("mysql:host=localhost;dbname=shopqst", "root", "");
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
@@ -96,9 +103,9 @@ class UserController
                           <p><strong>Nội dung:</strong><br>$message</p>";
 
             if (Mailer::sendMail($adminEmail, $emailSubject, $emailBody)) {
-                $_SESSION['contract_success'] = "Cảm ơn bạn đã liên hệ!";
+                $_SESSION['contact_success'] = "Cảm ơn bạn đã liên hệ!";
             } else {
-                $_SESSION['contract_error'] = "Gửi email thất bại. Vui lòng thử lại!";
+                $_SESSION['contact_error'] = "Gửi email thất bại. Vui lòng thử lại!";
             }
 
             $config = require './config.php';

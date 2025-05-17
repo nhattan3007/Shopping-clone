@@ -42,8 +42,13 @@ class CartController
         $cartItems = [];
         if (isset($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $product) {
+                // Fetch product details from the database using the Product ID from the session
                 $products =  $productModel->getProductById($product['ProductId']);
+
+                // Add the quantity from the session cart to the product details fetched from the database
                 $products['quantity'] = $product['quantity'];
+
+                // Add the combined product details to the cart items array
                 $cartItems[] =  $products;
             }
         }
