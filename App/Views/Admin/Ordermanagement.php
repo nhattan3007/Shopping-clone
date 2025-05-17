@@ -21,13 +21,13 @@ include "Layout/Slidebar.php";?>
                 <?php
                     foreach($orders as $order):?>
                          <tr>
-                            <td><?= $order['id'] ?></td>
-                            <td><?= htmlspecialchars($order['fullname']) ?></td>
-                            <td><?= $order['order_date'] ?></td>
-                            <td><?= number_format($order['total_amount'], 0) ?>$</td>
-                            <td><?= ucwords(strtolower($order['status'])) ?></td>
+                            <td><?= $order['OrderId'] ?></td>
+                            <td><?= htmlspecialchars($order['FullName']) ?></td>
+                            <td><?= $order['OrderDate'] ?></td>
+                            <td><?= number_format($order['TotalAmount'], 0) ?>$</td>
+                            <td><?= ucwords(strtolower($order['Status'])) ?></td>
                             <td> <form method="post" action="<?= $baseURL ?>order/updateStatus" class="d-flex gap-1">
-                            <input type="hidden" name="order_id" value="<?= $order['id'] ?>">
+                            <input type="hidden" name="order_id" value="<?= $order['OrderId'] ?>">
                             <select name="status" class="form-select form-select-sm">
                                         <option value="" selected></option>                            
                                         <option value="Đặt hàng" >Đặt hàng</option>
