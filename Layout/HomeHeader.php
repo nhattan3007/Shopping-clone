@@ -56,7 +56,10 @@ if (session_status() === PHP_SESSION_NONE) {
                                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
                                     <li><a class="dropdown-item" href="#!"><?= $_SESSION['username'] ?></a></li>
                                     <li><a class="dropdown-item" href="<?=$baseURL?>order/history">Lịch sử đơn hàng</a></li>
-                                    <li><a class="dropdown-item" href="<?=$baseURL?>admin/index">Amin</a></li>
+                                    <li><?php if (isset($_SESSION['role']) && $_SESSION['role'] == 1): ?>
+                                        <a class= "dropdown-item" href="<?= $baseURL ?>admin/index" class="nav-link">Admin</a>
+                                    <?php endif; ?></a></li>
+
                                     <li><hr class="dropdown-divider" /></li>
                                     <li><a class="dropdown-item" href="<?=$baseURL?>user/logout">Logout</a></li>
                                 </ul>

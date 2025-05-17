@@ -3,6 +3,7 @@ require_once __DIR__ . "/../Models/UserModel.php";
 require_once __DIR__ . "/../../Core/PHPMailer/Mailer.php";
 
 class UserController{
+
     public function register()
     {
         if (session_status() === PHP_SESSION_NONE)
@@ -38,37 +39,46 @@ class UserController{
        include 'App/Views/User/Register.php';
     }
     public function login()
-    {
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-        $error = '';
-
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-
-            $pdo = new PDO("mysql:host=localhost;dbname=shoppingqsT", "root", "");
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-            $stmt->execute([$username]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
-
-            if ($user && password_verify($password, $user['Password'])) {
-                $_SESSION['user_id'] = $user['UserId'];
-                $_SESSION['username'] = $user['UserName'];
-                $config = require 'config.php';
-            
-                $baseURL = $config['baseURL'];
-                header("Location: " . $baseURL.'home/index'); // về trang chủ
-                exit;
-            } else {
-                $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
-            }
-        }
-        include 'App/Views/User/Login.php';
+{
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
     }
+
+    $error = '';
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = $_POST['username'];
+        $password = $_POST['password'];
+
+        $pdo = new PDO("mysql:host=localhost;dbname=shoppingqsT", "root", "");
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
+        $stmt->execute([$username]);
+        $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($user && password_verify($password, $user['Password'])) {
+            $_SESSION['user_id'] = $user['UserId'];
+            $_SESSION['username'] = $user['UserName'];
+            $_SESSION['role'] = $user['role']; // lưu quyền admin/user
+
+            $config = require 'config.php';
+            $baseURL = $config['baseURL'];
+
+            // Chuyển hướng theo role
+            if ($user['role'] == 1) {
+                header("Location: " . $baseURL . "home/index");
+            } else {
+                header("Location: " . $baseURL . "home/index");
+            }
+            exit;
+        } else {
+            $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
+        }
+    }
+
+    include 'App/Views/User/Login.php';
+}
     public function logout(){
         if (session_status() === PHP_SESSION_NONE) {
             session_start();

@@ -30,10 +30,8 @@
                         </div>
                     </div>
                     <?php endforeach; ?>
-
                 </div>
             </div>
         </section>
         <!-- Footer-->
-
         <?php require "Layout/HomeFooter.php" ?>

@@ -1,7 +1,8 @@
 <?php 
 require_once __DIR__ . "/../../Core/db.php";
 
-class UserModel{
+class UserModel
+{
     private $db;
 
     public function __construct()
@@ -24,6 +25,7 @@ class UserModel{
         $stmt->execute([$fullname, $username, $hashedPassword]);
         return $this->db->lastInsertId();
     }
+    
 }
 
 ?>
