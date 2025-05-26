@@ -32,6 +32,8 @@ $baseURL = $config['baseURL'];
                                 </div>
                                 <?php if (!empty($_SESSION['register_error'])): ?>
                                     <div class="alert alert-danger"><?= $_SESSION['register_error'] ?></div>
+                                    <!-- xóa thông báo lỗi sau khi hiện thị ở lần load tiếp theo -->
+                                    <?php unset($_SESSION['register_error']); ?>
                                 <?php endif; ?>
                                 <div class="card-body">
                                     <form action="<?= $baseURL . "User/register" ?>" method="post">

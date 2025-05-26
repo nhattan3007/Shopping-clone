@@ -17,17 +17,29 @@ class UserController
 
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $fullname = $_POST['FullName'];
-            $username = $_POST['UserName'];
-            $password = $_POST['Password'];
-            $conformPassword = $_POST['ConfirmPassword'] ?? '';
-            if ($password !== $conformPassword) {
+            // dùng trim() để tránh lỗi do người dùng nhập thừa dấu cách.
+            // Nhiều lỗi sai mật khẩu hoặc username là do người dùng copy/paste có khoảng trắng không nhìn thấy.
+
+            // phần Post này sẽ lấy giá trị từ form đăng ký nên phải đúng tên các trường trong form.
+            $fullname = trim($_POST['fullname']); // FullName thành fullname
+            $username = trim($_POST['username']); // UserName thành username
+            $password = trim($_POST['password']); // Password thành password
+            $confirmpassword = trim($_POST['confirm_password'] ?? ''); // ConfirmPassword thành confirm_password
+
+            // Thêm debug để kiểm tra giá trị nhớ tắt nếu ko cần thiết
+            // error_log("Password: " . $password);
+            // error_log("Confirm Password: " . $conformPassword);
+            // error_log("Length Password: " . strlen($password));
+            // error_log("Length Confirm: " . strlen($conformPassword));
+
+            // dùng strcmp() cho so sánh chính xác giá trị chuỗi (string).
+            if (strcmp($password, $confirmpassword) !== 0) {
                 $_SESSION['register_error'] = "Wrong password";
                 header("Location: " . $baseURL . 'User/register');
                 exit;
-            } else {
-                $userModel = new UserModel();
             }
+
+            $userModel = new UserModel();
             $userId = $userModel->createUser($username, $password, $fullname);
 
             $_SESSION['userid'] = $userId;
