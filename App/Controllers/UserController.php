@@ -51,48 +51,66 @@ class UserController
         // Nếu không phải là POST request, hiển thị form đăng ký
         include 'App/Views/User/Register.php';
     }
+
+    // Phương thức đăng nhập người dùng
     public function login()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        $error = '';
 
+        $config = require './config.php';
+        $baseURL = $config['baseURL'];
+
+        // nhan POST request từ form đăng nhập
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            $username = trim($_POST['username'] ?? ''); // dùng ?? để tránh lỗi nếu không có trường này
+            $password = trim($_POST['password'] ?? '');
 
-            $pdo = new PDO("mysql:host=localhost;dbname=shopqst", "root", "");
-            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            // Kiểm tra người dùng trong cơ sở dữ liệu
+            $userModel = new UserModel();
+            $users = $userModel->getUserByUserName($username);
 
-            $stmt = $pdo->prepare("SELECT * FROM users WHERE username = ?");
-            $stmt->execute([$username]);
-            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+            // so sánh password với password đã mã hóa trong database
+            // nếu đúng lưu thông tin vào $_SESSION và chyên hướng về home/index
+            // nếu sai thì lưu thông báo lỗi vào $_SESSION và chuyển hướng về user/login
+            if ($users && password_verify($password, $users['Password'])) {
+                // đăng nhập success
+                $_SESSION['userid'] = $users['UserId']; // lưu id người dùng vào session
+                $_SESSION['username'] = $users['UserName']; // lưu tên người dùng vào session
+                $_SESSION['fullname'] = $users['FullName']; // lưu tên đầy đủ người dùng vào session
 
-            if ($user && password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $config = require 'config.php';
-
-                $baseURL = $config['baseURL'];
-                header("Location: " . $baseURL . 'home/index'); // về trang chủ
+                // chuyển hướng về trang chủ
+                header("Location: " . $baseURL . 'Home/index');
                 exit;
             } else {
-                $error = "Tên đăng nhập hoặc mật khẩu không đúng.";
+                // đăng nhập thất bại
+                $_SESSION['login_error'] = "Invalid username or password";
+                header("Location: " . $baseURL . 'User/login');
+                exit;
             }
         }
+        // nếu là get request thì hiện thị ra form đăng nhập
         include 'App/Views/User/Login.php';
     }
+
+    // Phương thức xử lý đăng xuất
     public function logout()
     {
         if (session_status() === PHP_SESSION_NONE) {
             session_start();
         }
-        unset($_SESSION['user_id']);
-        unset($_SESSION['username']);
-        $config = require 'config.php';
 
+        session_unset(); // xóa tất cả các biến trong $_SESSION
+        session_unset(); // Hủy file session trên server
+
+        // unset($_SESSION['user_id']);
+        // unset($_SESSION['username']);
+
+        // quay lại trang trang chủ
+        $config = require 'config.php';
         $baseURL = $config['baseURL'];
+
         header("Location: " . $baseURL . 'home/index'); // về trang chủ
         exit;
     }

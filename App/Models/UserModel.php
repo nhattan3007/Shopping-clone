@@ -27,4 +27,14 @@ class UserModel
         $stmt->execute([$username, $hashedPassword, $fullname]);
         return $this->db->lastInsertId();
     }
+
+    //lấy người dùng theo tên đăng nhập
+    public function getUserByUserName($username)
+    {
+        $sql = "SELECT * FROM users WHERE UserName = ?"; // Sử dụng prepared statement để tránh SQL injection '?'
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$username]); // để trong dấu [] là các tham số sẽ được thay thế vào dấu hỏi '?'
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
 }

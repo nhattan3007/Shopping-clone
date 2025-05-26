@@ -52,7 +52,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <!-- Dời phần Profile ra ngoài ul này -->
                 <div class="d-flex align-items-center">
                     <?php
-                    if (isset($_SESSION['user_id'])) {
+                    if (isset($_SESSION['userid'])) { // đổi user_id thành userid
                     ?>
                         <div class="nav-item dropdown me-3">
                             <a class="nav-link dropdown-toggle" id="navbarDropdownProfile" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
