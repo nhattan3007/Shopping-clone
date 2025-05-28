@@ -5,6 +5,10 @@ $baseURL = $config['baseURL'];    // Lấy giá trị 'baseURL' từ mảng cấ
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+// Load CartController để sử dụng static methods
+require_once 'App/Controllers/CartController.php';
+$cartTotalQuantity = CartController::getTotalQuantity();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -76,16 +80,16 @@ if (session_status() === PHP_SESSION_NONE) {
                     }
                     ?>
 
-                    <!-- Form giỏ hàng Cart -->
-                    <form action="<?= $baseURL . 'cart/index' ?>" method="POST" class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit">
-                            <i class="bi-cart-fill me-1"></i>
-                            Cart
+                    <!-- Cart Button with accurate count -->
+                    <a href="<?= $baseURL . 'cart/index' ?>" class="btn btn-outline-dark">
+                        <i class="bi-cart-fill me-1"></i>
+                        Cart
+                        <?php if ($cartTotalQuantity > 0): ?>
                             <span class="badge bg-dark text-white ms-1 rounded-pill">
-                                <?= array_sum(array_column($_SESSION['cart'] ?? [], 'quantity')) ?>
+                                <?= $cartTotalQuantity ?>
                             </span>
-                        </button>
-                    </form>
+                        <?php endif; ?>
+                    </a>
                 </div>
             </div>
         </div>

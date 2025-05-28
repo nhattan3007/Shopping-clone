@@ -9,8 +9,7 @@
         </div>
 
         <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-            <?php $limitedProducts = array_slice($productList, 0, 4);
-            foreach ($limitedProducts as $item) : ?>
+            <?php foreach ($productList as $item) : ?>
                 <div class="col mb-5">
                     <div class="card h-100">
                         <a href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>">
@@ -52,15 +51,6 @@
                 </div>
             <?php endforeach; ?>
 
-            <!-- Nút xem thêm -->
-            <?php if (count($productList) > 4) : ?>
-                <div class="text-center mt-4">
-                    <a href="<?= $baseURL . 'product/index' ?>" class="btn btn-primary btn-lg">
-                        Xem thêm
-                        <i class="fas fa-arrow-right ms-2"></i>
-                    </a>
-                </div>
-            <?php endif; ?>
         </div>
     </div>
 </section>
