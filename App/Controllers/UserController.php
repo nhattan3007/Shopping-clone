@@ -76,6 +76,7 @@ class UserController
             // nếu sai thì lưu thông báo lỗi vào $_SESSION và chuyển hướng về user/login
             if ($users && password_verify($password, $users['Password'])) {
                 // đăng nhập success
+                // đăng nhập thành công, lưu thông tin vào session
                 $_SESSION['userid'] = $users['UserId']; // lưu id người dùng vào session
                 $_SESSION['username'] = $users['UserName']; // lưu tên người dùng vào session
                 $_SESSION['fullname'] = $users['FullName']; // lưu tên đầy đủ người dùng vào session

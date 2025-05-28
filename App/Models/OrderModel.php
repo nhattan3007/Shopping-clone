@@ -17,6 +17,7 @@ class OrderModel
         $stmt->execute([$order_date, $user_id, $total_amount]);
         return $this->db->lastInsertId();
     }
+
     // cập nhập tổng đơn hàng
     public function updateOrderTotal($orderId, $totalAmount)
     {
@@ -24,6 +25,7 @@ class OrderModel
         $stmt = $this->db->prepare($sql);
         $stmt->execute([$totalAmount, $orderId]);
     }
+
     //nhập dữ liệu đơn hàng
     public function insertOrderItem($orderId, $productId, $quantity, $price)
     {
@@ -32,6 +34,7 @@ class OrderModel
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$orderId, $productId, $quantity, $price]);
     }
+
     //sấp xếp đơn hàng theo ngày
     public function getOrdersByUserId($userId)
     {
@@ -40,6 +43,8 @@ class OrderModel
         $stmt->execute([$userId]);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
     //lấy đơn hàng từ khách hàng
     public function getAllOrdersWithUser()
     {
@@ -51,6 +56,8 @@ class OrderModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+
     //cập nhật trạng thái của đơn hàng
     public function updateStatus($orderId, $newStatus)
     {
@@ -58,6 +65,8 @@ class OrderModel
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([$newStatus, $orderId]);
     }
+
+
     //lấy đơn hàng trong 7 ngày gần nhất
     public function getOrderCountPerDay($days = 7)
     {

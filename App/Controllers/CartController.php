@@ -2,8 +2,14 @@
 
 class CartController
 {
+    // Phương thức thêm sản phẩm vào giỏ hàng
     public function add()
     {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+
         if (
             $_SERVER['REQUEST_METHOD'] === 'POST'
             && isset($_POST['product_id'])
@@ -22,15 +28,16 @@ class CartController
                     'quantity' => 1
                 ];
             }
-            $config = require 'config.php';
 
+            $config = require 'config.php';
             $baseURL = $config['baseURL'];
 
-
-            header('Location:' . $baseURL . '/Product/index');
+            header('Location:' . $baseURL . '/home/index');
             exit;
         }
     }
+
+    // Phưởng thức hiện thị giỏ hàng 
     public function index()
     {
         require_once 'App/Models/ProductModel.php';
