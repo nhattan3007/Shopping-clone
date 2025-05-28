@@ -23,21 +23,39 @@
             foreach ($limitedProducts as $item) : ?>
                 <div class="col mb-5">
                     <div class="card h-100">
-                        <!-- Product image -->
-                        <img class="card-img-top" src="<?= $baseURL . 'Assets/uploads/images/' . $item['Image'] ?>" alt="<?= $item['ProductName'] ?>" />
-                        <!-- Product details -->
+                        <a href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>">
+                            <img class="card-img-top"
+                                src="<?= $baseURL . 'Assets/uploads/images/' . $item['Image'] ?>"
+                                alt="<?= $item['ProductName'] ?>"
+                                style="cursor: pointer; transition: transform 0.2s;"
+                                onmouseover="this.style.transform='scale(1.05)'"
+                                onmouseout="this.style.transform='scale(1)'" />
+                        </a>
+
                         <div class="card-body p-4">
                             <div class="text-center">
-                                <!-- Product name -->
-                                <h5 class="fw-bolder"><?= $item['ProductName'] ?></h5>
-                                <!-- Product price -->
+                                <h5 class="fw-bolder">
+                                    <a href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>"
+                                        class="text-decoration-none text-dark"
+                                        style="transition: color 0.2s;"
+                                        onmouseover="this.style.color='#0d6efd'"
+                                        onmouseout="this.style.color='#212529'">
+                                        <?= $item['ProductName'] ?>
+                                    </a>
+                                </h5>
                                 <p class="text-muted">$<?= number_format($item['Price'], 0) ?></p>
                             </div>
                         </div>
-                        <!-- Product actions -->
+
                         <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                             <div class="text-center">
-                                <a class="btn btn-outline-dark mt-auto" href="<?= $baseURL . 'product/detail' . $item['ProductId'] ?>">Chi tiết</a>
+                                <a class="btn btn-outline-dark mt-auto"
+                                    href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>"
+                                    style="transition: all 0.2s;"
+                                    onmouseover="this.classList.add('btn-dark'); this.classList.remove('btn-outline-dark')"
+                                    onmouseout="this.classList.add('btn-outline-dark'); this.classList.remove('btn-dark')">
+                                    Chi tiết
+                                </a>
                             </div>
                         </div>
                     </div>
