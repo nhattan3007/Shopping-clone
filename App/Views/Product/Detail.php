@@ -20,7 +20,7 @@ include "Layout/HomeHeader.php";
         <div class="col-md-6">
             <h4><?= htmlspecialchars($product['ProductName']) ?></h4>
 
-            <p class="sale-price">Price: <?= number_format($product['Price']) ?></p>
+            <p class="sale-price">Price: <?= number_format($product['Price']) ?>VND</p>
             <p><strong>Bảo hành:</strong> 12 tháng sau khi mua</p>
             <p><strong>Tình trạng:</strong> <span class="text-success">Còn hàng</span></p>
 

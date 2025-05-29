@@ -30,7 +30,7 @@ include "Layout/HomeHeader.php"
                     ?>
                         <tr>
                             <td><?= htmlspecialchars($item['ProductName']) ?></td>
-                            <td>$<?= number_format($item['Price'], 2) ?></td>
+                            <td><?= number_format($item['Price'], 2) ?>VND</td>
                             <td><?= $item['quantity'] ?></td>
                             <td>$<?= number_format($total, 2) ?></td>
                         </tr>
