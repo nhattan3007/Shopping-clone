@@ -22,14 +22,19 @@ class productModel
         $stmt = $this->db->prepare("INSERT INTO nameindata (Name, Price, Image) VALUES (?, ?, ?)");
         $stmt->execute([$name, $price, $image]);
     }
-    //lấy sản phẩm từ ID để thống kê
-    public function getProductById($id)
+    //lấy sản phẩm từ ID
+    public function getProductById($productid)
     {
-        $sql = "SELECT * FROM product WHERE Id = :id";
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        // sữ dụng try catch để bắt lỗi nếu có
+        try {
+            $sql = "SELECT * FROM products WHERE ProductId = ?";
+            $stmt = $this->db->prepare($sql);
+            $stmt->execute([$productid]);
+            return $stmt->fetch(PDO::FETCH_ASSOC); // Trả về sản phẩm dưới dạng mảng kết hợp
+        } catch (PDOException $e) {
+            echo "Error fetching product by ID: " . $e->getMessage();
+            return false;
+        }
     }
     public function delete($id)
     {

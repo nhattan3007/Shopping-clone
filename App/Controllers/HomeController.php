@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__ . "/../Models/ProductModel.php";
-class HomeController{
+class HomeController
+{
 
     public function index()
     {
