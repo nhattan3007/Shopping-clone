@@ -194,4 +194,33 @@ class OrderModel
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getOrderCountPerMonth($months = 7)
+    {   
+        $stmt = $this->db->prepare("
+            SELECT DATE_FORMAT(OrderDate, '%Y-%m') as order_month, COUNT(*) as order_count
+            FROM orders
+            WHERE OrderDate >= DATE_SUB(CURDATE(), INTERVAL :months MONTH)
+            GROUP BY order_month
+            ORDER BY order_month ASC
+        ");
+        $stmt->bindValue(':months', $months, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function getRevenuePerWeek($weeks = 8)
+    {
+        $stmt = $this->db->prepare("
+            SELECT 
+                YEAR(OrderDate) as order_year,
+                WEEK(OrderDate, 1) as order_week, -- 1: tuần bắt đầu từ Thứ 2
+                SUM(TotalAmount) as total_revenue
+            FROM orders
+            WHERE OrderDate >= DATE_SUB(CURDATE(), INTERVAL :weeks WEEK)
+            GROUP BY order_year, order_week
+            ORDER BY order_year ASC, order_week ASC
+        ");
+        $stmt->bindValue(':weeks', $weeks, PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }
