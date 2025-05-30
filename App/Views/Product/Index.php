@@ -1,45 +1,58 @@
-<?php require "Layout/HomeHeader.php";
-// var_dump($productList);
-    $config = require 'config.php';
-    $baseURL = $config['baseURL'];  
-    
-        ?>
-        <!-- Section-->
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <?php foreach ($productList as $product): ?>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="<?=$baseURL.'assets/'.$product['Image']?>" alt="<?=$product['Image']?>" />
-                                <!-- Product details -->
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <!-- Product name-->
-                                    <h5 class="fw-bolder"><?php echo ($product['Name']); ?></h5>
-                                    <!-- Product price-->
-                                    <?php echo ($product['Price']);?>
-                                </div>
-                            </div>
-                            <!-- Product actions-->
-                            <form method="post" action="<?=$baseURL .'cart/add'?>" class="text-center mb-lg-2">
-                            <input type="hidden" name="product_id" value="<?= $product['Id'] ?>">
-                            <button type="submit" class=" btn-outline-light p4 mt-auto btn btn-primary btn-sm">Add to Cart</button>
+<?php include_once "Layout/HomeHeader.php" ?>
+<!-- Section-->
+<section class="py-5">
+    <div class="container px-4 px-lg-5 mt-5">
 
-                                <!-- <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="display: flex;">
-                                    <div class="text-center"><a class="btn btn-outline-light mt-auto btn-primary " href="#">View options</a></div>
-                                    <input type="hidden" name="product_id" value="">
-                                    <div class="text-center"><a class="btn btn-outline-light mt-auto btn-primary ms-lg-1 " href="#">Add recard</a></div>
-                                </div> -->
-                            </form>
+        <div class="text-center mb-5">
+            <h2 class="fw-bold">Sản phẩm nổi bật</h2>
+            <p class="text-muted">Khám phá những sản phẩm được yêu thích nhất</p>
+        </div>
+
+        <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            <?php foreach ($productList as $item) : ?>
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <a href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>">
+                            <img class="card-img-top"
+                                src="<?= $baseURL . 'Assets/uploads/images/' . $item['Image'] ?>"
+                                alt="<?= $item['ProductName'] ?>"
+                                style="cursor: pointer; transition: transform 0.2s;"
+                                onmouseover="this.style.transform='scale(1.05)'"
+                                onmouseout="this.style.transform='scale(1)'" />
+                        </a>
+
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <h5 class="fw-bolder">
+                                    <a href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>"
+                                        class="text-decoration-none text-dark"
+                                        style="transition: color 0.2s;"
+                                        onmouseover="this.style.color='#0d6efd'"
+                                        onmouseout="this.style.color='#212529'">
+                                        <?= $item['ProductName'] ?>
+                                    </a>
+                                </h5>
+                                <p class="text-muted">$<?= number_format($item['Price'], 0) ?></p>
+                            </div>
+                        </div>
+
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center">
+                                <a class="btn btn-outline-dark mt-auto"
+                                    href="<?= $baseURL . 'product/detail?productid=' . $item['ProductId'] ?>"
+                                    style="transition: all 0.2s;"
+                                    onmouseover="this.classList.add('btn-dark'); this.classList.remove('btn-outline-dark')"
+                                    onmouseout="this.classList.add('btn-outline-dark'); this.classList.remove('btn-dark')">
+                                    Chi tiết
+                                </a>
+                            </div>
                         </div>
                     </div>
-                    <?php endforeach; ?>
-
                 </div>
-            </div>
-        </section>
-        <!-- Footer-->
+            <?php endforeach; ?>
 
-        <?php require "Layout/HomeFooter.php" ?>
+        </div>
+    </div>
+</section>
+<!-- Footer-->
+<?php include_once "Layout/HomeFooter.php" ?>

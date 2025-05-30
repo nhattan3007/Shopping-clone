@@ -1,7 +1,8 @@
-<?php 
+<?php
 require_once __DIR__ . "/../../Core/db.php";
 
-class UserModel{
+class UserModel
+{
     private $db;
 
     public function __construct()
@@ -16,14 +17,24 @@ class UserModel{
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     //tạo người dùng mới với hashpassword **hash password là mã hóa hóa password 1 chiều để chặng đánh cấp dữ liệu
-    public function createUser($fullname, $username, $password)
+    public function createUser($username, $password, $fullname)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-        $sql = "INSERT INTO users (fullname, username, password) VALUES (?, ?,a ?)";
+        // Insert the new user into the database
+        // Sử dụng prepared statement để tránh SQL injection
+        $sql = "INSERT INTO users (UserName, Password, FullName) VALUES (?, ?, ?)"; // vì là đây là câu lệnh SQL nên phải ghi đúng tên trong bảng
         $stmt = $this->db->prepare($sql);
-        $stmt->execute([$fullname, $username, $hashedPassword]);
+        $stmt->execute([$username, $hashedPassword, $fullname]);
         return $this->db->lastInsertId();
     }
-}
 
-?>
+    //lấy người dùng theo tên đăng nhập
+    public function getUserByUserName($username)
+    {
+        $sql = "SELECT * FROM users WHERE UserName = ?"; // Sử dụng prepared statement để tránh SQL injection '?'
+        $stmt = $this->db->prepare($sql);
+        $stmt->execute([$username]); // để trong dấu [] là các tham số sẽ được thay thế vào dấu hỏi '?'
+
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+}

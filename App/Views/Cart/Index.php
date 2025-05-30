@@ -23,14 +23,14 @@ include "Layout/HomeHeader.php"
                 </thead>
                 <tbody>
                     <?php
-                    $totalAll = 0;  
+                    $totalAll = 0;
                     foreach ($cartItems as $item) :
                         $total = $item['Price'] * $item['quantity'];
                         $totalAll += $total;
                     ?>
                         <tr>
-                            <td><?= htmlspecialchars($item['Name']) ?></td>
-                            <td>$<?= number_format($item['Price'], 2) ?></td>
+                            <td><?= htmlspecialchars($item['ProductName']) ?></td>
+                            <td>$<?= number_format($item['Price'], 0) ?></td>
                             <td><?= $item['quantity'] ?></td>
                             <td>$<?= number_format($total, 2) ?></td>
                         </tr>
