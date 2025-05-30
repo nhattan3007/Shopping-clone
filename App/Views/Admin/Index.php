@@ -40,7 +40,43 @@ include __DIR__ . "/../../../Layout/Slidebar.php";
                     <i class="fas fa-chart-area me-1"></i>
                     Area Chart Example
                 </div>
-                <div class="card-body"><canvas id="myAreaChart" width="100%" height="40"></canvas></div>
+                <div class="card-body"><canvas id="MyAreaChart" width="100%" height="40"></canvas></div>
+                <script>
+                    const labelsWeeks = <?php echo json_encode($labels); ?>;
+                    const dataWeeks = <?php echo json_encode($revenues); ?>;
+
+                    const cxt = document.getElementById('MyAreaChart').getContext('2d');
+                    const MyAreaChart = new Chart(cxt, {
+                        type: 'bar',
+                        data: {
+                            labels: labelsWeeks,
+                            datasets: [{
+                                label: 'Doanh thu theo tuần (VNĐ)',
+                                data: dataWeeks,
+                                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                                borderRadius: 5
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            return context.dataset.label + ': ' + context.formattedValue.toLocaleString('vi-VN') + ' VNĐ';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
         <div class="col-xl-6">
@@ -49,7 +85,35 @@ include __DIR__ . "/../../../Layout/Slidebar.php";
                     <i class="fas fa-chart-bar me-1"></i>
                     Bar Chart Example
                 </div>
-                <div class="card-body"><canvas id="myBarChart" width="100%" height="40"></canvas></div>
+                <div class="card-body"><canvas id="MyBarChart" width="100%" height="40"></canvas></div>
+                <script>
+                    const labelsMonth = <?php echo json_encode($monthsFormatted); ?>;
+                    const dataMonth = <?php echo json_encode($counts); ?>;
+
+                    const ctx = document.getElementById('MyBarChart').getContext('2d');
+                    const myBarChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labelsMonth,
+                            datasets: [{
+                                label: 'Số đơn hàng tháng này',
+                                data: dataMonth,
+                                backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                                borderColor: 'rgba(54, 162, 235, 1)',
+                                borderWidth: 1,
+                                borderRadius: 5
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                y: {
+                                    beginAtZero: true,
+                                    precision: 0
+                                }
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
     </div>

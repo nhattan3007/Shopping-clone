@@ -32,12 +32,12 @@ include "Layout/HomeHeader.php"
                             <td><?= htmlspecialchars($item['ProductName']) ?></td>
                             <td>$<?= number_format($item['Price'], 0) ?></td>
                             <td><?= $item['quantity'] ?></td>
-                            <td>$<?= number_format($total, 2) ?></td>
+                            <td>$<?= number_format($total, 0) ?></td>
                         </tr>
                     <?php endforeach; ?>
                     <tr class="table-secondary">
                         <th colspan="3" class="text-end">Tổng cộng:</th>
-                        <th>$<?= number_format($totalAll, 2) ?></th>
+                        <th>$<?= number_format($totalAll, 0) ?></th>
                     </tr>
                 </tbody>
             </table>
@@ -49,5 +49,5 @@ include "Layout/HomeHeader.php"
     </div>
 </section>
 <?php
-include "Layout/AdminFooter.php";
+include "Layout/HomeFooter.php";
 ?>

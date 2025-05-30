@@ -109,13 +109,22 @@ class CartController
                 $product = $productModel->getProductById($cartItem['ProductId']);
 
                 if ($product) {
-                    // Thêm quantity vào thông tin sản phẩm
-                    $product['quantity'] = $cartItem['quantity'];
-                    $product['subtotal'] = $product['Price'] * $cartItem['quantity'];
-                    $totalPrice += $product['subtotal'];
-
-                    $cartItems[] = $product;
+                    $cartItems[] = [
+                        'ProductId' => $cartItem['ProductId'],
+                        'ProductName' => $product['ProductName'],
+                        'Price' => $product['Price'],
+                        'quantity' => $cartItem['quantity']
+                    ];
                 }
+
+                // if ($product) {
+                //     // Thêm quantity vào thông tin sản phẩm
+                //     $product['quantity'] = $cartItem['quantity'];
+                //     $product['subtotal'] = $product['Price'] * $cartItem['quantity'];
+                //     $totalPrice += $product['subtotal'];
+
+                //     $cartItems[] = $product;
+                // }
             }
         }
 

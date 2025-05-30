@@ -30,7 +30,7 @@ $cartTotalQuantity = CartController::getTotalQuantity();
     <link href="<?= $baseURL . "/Assets/css/product-card.css" ?>" rel="stylesheet" />
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -95,3 +95,4 @@ $cartTotalQuantity = CartController::getTotalQuantity();
         </div>
     </nav>
     <!-- Header-->
+    <main class="flex-grow-1">
