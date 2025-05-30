@@ -75,5 +75,4 @@
     </div>
 </section>
 <!-- Footer-->
-<?php
-include_once "Layout/HomeFooter.php" ?>
+<?php include_once "Layout/HomeFooter.php" ?>
