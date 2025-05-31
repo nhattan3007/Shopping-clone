@@ -18,7 +18,7 @@ $cartTotalQuantity = CartController::getTotalQuantity();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>ShopQST</title>
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Bootstrap icons-->
@@ -41,17 +41,6 @@ $cartTotalQuantity = CartController::getTotalQuantity();
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
                     <li class="nav-item"><a class="nav-link active" aria-current="page" href="<?= $baseURL . 'product/index' ?>">Sản Phẩm</a></li>
                     <li class="nav-item"><a class="nav-link" href="<?= $baseURL . 'user/contact' ?>">Liên hệ</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Shop</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="<?= $baseURL . 'home/index' ?>">view all</a></li>
-                            <li>
-                                <hr class="dropdown-divider" />
-                            </li>
-                            <li><a class="dropdown-item" href="#!">Popular Items</a></li>
-                            <li><a class="dropdown-item" href="#!">New Arrivals</a></li>
-                        </ul>
-                    </li>
                 </ul>
                 <!-- Dời phần Profile ra ngoài ul này -->
                 <div class="d-flex align-items-center">
@@ -65,7 +54,7 @@ $cartTotalQuantity = CartController::getTotalQuantity();
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdownProfile">
                                 <li><a class="dropdown-item" href="#!"><?= $_SESSION['username'] ?></a></li>
                                 <li><a class="dropdown-item" href="<?= $baseURL ?>order/history">Lịch sử đơn hàng</a></li>
-                                <li><a class="dropdown-item" href="<?= $baseURL ?>admin/index">Amin</a></li>
+                                <li><a class="dropdown-item" href="<?= $baseURL ?>admin/index">Admin</a></li>
                                 <li>
                                     <hr class="dropdown-divider" />
                                 </li>
